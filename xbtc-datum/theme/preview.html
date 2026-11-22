@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crypto-Éire xBTC — DATUM</title>
+<style>
+  :root{
+    --bg:#05060a; --bg2:#0a0c14; --panel:#10131d; --panel2:#141826;
+    --line:#1e2436; --line2:#2b3350;
+    --green:#22c55e; --green-br:#4cf5a8; --green-deep:#0e3a24; --green-txt:#cfeeda;
+    --purple:#7c3aed; --purple-br:#9d4edd; --purple-bg:#1c1640; --purple-line:#3a2b7a;
+    --orange:#f7931a; --orange-bg:#2b2010; --orange-line:#5a420f;
+    --red:#ef4444;
+    --text:#e7eaf2; --muted:#949cb2; --faint:#606a84; --wordmark:#c7ccd6;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:
+      radial-gradient(900px 440px at 12% -8%, #0d1626 0%, transparent 60%),
+      radial-gradient(760px 420px at 100% -6%, #160f33 0%, transparent 58%),
+      var(--bg);
+    color:var(--text);font-family:Inter,ui-sans-serif,system-ui,"Segoe UI",sans-serif;
+    -webkit-font-smoothing:antialiased;min-height:100vh;padding:24px 18px 40px}
+  .wrap{max-width:1040px;margin:0 auto}
+
+  header.bar{display:flex;align-items:center;gap:14px;padding:12px 18px;
+    background:linear-gradient(180deg,#0c0f18,#080a11);border:1px solid var(--line);border-radius:16px}
+  .brandmark{width:44px;height:44px;border-radius:11px;flex:0 0 auto;
+    box-shadow:0 0 0 1px var(--line), 0 0 22px rgba(76,245,168,.12)}
+  .brand h1{margin:0;font-size:22px;font-weight:600;letter-spacing:.3px;color:var(--wordmark);line-height:1}
+  .brand .sub{margin-top:3px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+  .topstats{margin-left:auto;display:flex;gap:22px}
+  .topstats .k{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+  .topstats .v{font-family:var(--mono);font-size:15px;margin-top:3px;color:var(--green-br)}
+  .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green-br);
+    box-shadow:0 0 8px var(--green-br);margin-right:6px;vertical-align:1px}
+
+  .ident{display:flex;align-items:center;gap:16px;margin:16px 0 4px;padding:16px 20px;
+    background:linear-gradient(180deg,#120f22,#0b0a16);border:1px solid var(--purple-line);border-radius:16px}
+  .coin{width:50px;height:50px;flex:0 0 auto}
+  .ident h2{margin:0;font-size:21px;font-weight:600;color:#fff;letter-spacing:.2px}
+  .pills{display:flex;gap:9px;margin-top:9px;flex-wrap:wrap}
+  .pill{font-size:11.5px;font-weight:600;letter-spacing:.05em;padding:4px 12px;border-radius:999px}
+  .pill.algo{color:var(--green-br);border:1px solid var(--green);background:rgba(34,197,94,.08)}
+  .pill.tides{color:#fff;background:linear-gradient(180deg,var(--purple-br),var(--purple));border:1px solid var(--purple-line)}
+  .pill.fee{color:var(--orange);border:1px solid var(--orange-line);background:var(--orange-bg)}
+  .ident .pool{margin-left:auto;text-align:right}
+  .ident .pool .k{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+  .ident .pool .v{font-family:var(--mono);font-size:13px;color:var(--purple-br);margin-top:3px}
+
+  nav{display:flex;gap:7px;margin:18px 0 18px;flex-wrap:wrap}
+  nav a{font-size:13.5px;padding:9px 18px;border-radius:10px;text-decoration:none;color:var(--muted);
+    border:1px solid transparent}
+  nav a:hover{color:var(--text);background:rgba(124,58,237,.08)}
+  nav a.active{color:var(--green-br);background:var(--green-deep);border-color:var(--green);font-weight:600;
+    box-shadow:0 0 18px rgba(34,197,94,.14)}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(174px,1fr));gap:13px}
+  .card{background:linear-gradient(180deg,#10131e,#0b0e16);border:1px solid var(--line);border-radius:14px;
+    padding:15px 17px;position:relative;overflow:hidden}
+  .card .k{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+  .card .v{font-family:var(--mono);font-size:25px;font-weight:500;margin-top:8px;color:var(--text);line-height:1}
+  .card .v small{font-size:13px;color:var(--muted);font-family:Inter,sans-serif}
+  .card.hero{grid-column:span 2;background:linear-gradient(180deg,#0e2018,#0a1510);border-color:var(--green-deep)}
+  .card.hero .v{font-size:40px;color:var(--green-br)}
+  .card .edge{position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--green)}
+  .card .up{font-size:12px;color:var(--green-br);margin-top:7px;font-family:var(--mono)}
+
+  section{margin-top:20px}
+  .h{display:flex;align-items:center;gap:9px;margin:0 0 11px;font-size:13px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--faint);font-weight:600}
+  .h::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--purple-br)}
+
+  .panel{background:linear-gradient(180deg,#0e111b,#0a0d15);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  thead th{text-align:left;padding:12px 16px;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--faint);border-bottom:1px solid var(--line);font-weight:600}
+  tbody td{padding:13px 16px;border-bottom:1px solid rgba(30,36,54,.6);font-family:var(--mono);color:var(--text)}
+  tbody tr:last-child td{border-bottom:none}
+  .addr{color:var(--muted)}
+  .tag{display:inline-block;font-family:Inter,sans-serif;font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px;
+    background:rgba(34,197,94,.12);color:var(--green-br);border:1px solid var(--green)}
+
+  .job{display:flex;gap:18px;flex-wrap:wrap;padding:16px 18px}
+  .job .col{flex:1 1 140px}
+  .job .k{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+  .job .v{font-family:var(--mono);font-size:15px;margin-top:5px;color:var(--text)}
+  .job .v.g{color:var(--green-br)}
+
+  footer{margin-top:24px;text-align:center;color:var(--faint);font-size:12px}
+  footer b{color:var(--green-br);font-weight:500}
+  footer .sep{color:var(--line2);margin:0 8px}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h2 class="sr-only">Mockup of the Crypto-Éire xBTC DATUM dashboard using the live site's logos and colours.</h2>
+
+  <header class="bar">
+    <img class="brandmark" src="assets/crypto-eire-icon.png" alt="Crypto-Éire">
+    <div class="brand">
+      <h1>Crypto&#8209;Éire</h1>
+      <div class="sub">xBTC · DATUM Gateway</div>
+    </div>
+    <div class="topstats">
+      <div><div class="k">Miners</div><div class="v">1</div></div>
+      <div><div class="k">Hashrate</div><div class="v">0.93 TH/s</div></div>
+      <div><div class="k">Pool</div><div class="v"><span class="dot"></span>TIDES</div></div>
+    </div>
+  </header>
+
+  <div class="ident">
+    <img class="coin" src="assets/xbtc-coin.png" alt="xBTC">
+    <div>
+      <h2>Bitcoin Knots Cash</h2>
+      <div class="pills">
+        <span class="pill algo">BLAKE2B</span>
+        <span class="pill tides">POOL · TIDES</span>
+        <span class="pill fee">1% FEE</span>
+      </div>
+    </div>
+    <div class="pool">
+      <div class="k">Upstream</div>
+      <div class="v">datum.crypto-eire.com:22000</div>
+    </div>
+  </div>
+
+  <nav>
+    <a class="active" href="#">Status</a>
+    <a href="#">Config</a>
+    <a href="#">Clients</a>
+    <a href="#">Threads</a>
+    <a href="#">Coinbaser</a>
+  </nav>
+
+  <div class="grid">
+    <div class="card hero"><span class="edge"></span>
+      <div class="k">Pool hashrate</div>
+      <div class="v">0.93 <small>TH/s</small></div>
+      <div class="up">▲ vardiff 17.6T · 1 worker live</div>
+    </div>
+    <div class="card"><div class="k">Connected miners</div><div class="v">1</div></div>
+    <div class="card"><div class="k">Network height</div><div class="v">17,704</div></div>
+    <div class="card"><div class="k">Blocks found</div><div class="v">0</div></div>
+    <div class="card"><div class="k">Block reward</div><div class="v">50<small> XBT</small></div></div>
+  </div>
+
+  <section>
+    <h3 class="h">Current template · block 17,704</h3>
+    <div class="panel">
+      <div class="job">
+        <div class="col"><div class="k">Value</div><div class="v g">50.00003375 XBT</div></div>
+        <div class="col"><div class="k">Transactions</div><div class="v">1</div></div>
+        <div class="col"><div class="k">Size</div><div class="v">225 bytes</div></div>
+        <div class="col"><div class="k">Coinbase tag</div><div class="v">Crypto-Éire · xBTC</div></div>
+        <div class="col"><div class="k">Algorithm</div><div class="v">BLAKE2b</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3 class="h">Miners</h3>
+    <div class="panel">
+      <table>
+        <thead><tr><th>Worker</th><th>Payout address</th><th>Hashrate</th><th>Difficulty</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>suxmyknotz</td>
+            <td class="addr">bc1q0682…052tm6p</td>
+            <td>0.93 TH/s</td>
+            <td>18.1T</td>
+            <td><span class="tag">mining</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>Powered by DATUM<span class="sep">·</span>TIDES<span class="sep">·</span><b>crypto-eire.com</b><span class="sep">·</span>decentralised xBTC templates from your own node</footer>
+</div>
+</body>
+</html>

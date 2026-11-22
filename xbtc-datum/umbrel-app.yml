@@ -2,9 +2,9 @@ manifestVersion: 1
 id: xbtc-datum
 name: DATUM for xBTC
 tagline: Decentralized Bitcoin Knots Cash mining with your own templates
-icon: https://raw.githubusercontent.com/BitcoinKnotsCash/BitcoinKnotsCash/master/logo.png
+icon: https://raw.githubusercontent.com/freshmeatz/bitcoinknotscash-umbrel/master/xbtc-datum/theme/assets/app-icon.png
 category: Bitcoin
-version: "v1.15-blake2b"
+version: "v1.15-blake2b.1"
 port: 21019
 description: >-
   A DATUM (Decentralized Alternative Templates for Universal Mining) gateway for
@@ -27,9 +27,10 @@ submission: https://github.com/freshmeatz/bitcoinknotscash-umbrel
 repo: https://github.com/OCEAN-xyz/datum_gateway
 support: https://github.com/freshmeatz/bitcoinknotscash-umbrel/issues
 gallery:
-  - https://raw.githubusercontent.com/BitcoinKnotsCash/BitcoinKnotsCash/master/logo.png
+  - https://raw.githubusercontent.com/freshmeatz/bitcoinknotscash-umbrel/master/xbtc-datum/theme/assets/crypto-eire-icon.png
 releaseNotes: >-
-  Dedicated xBTC DATUM gateway, pre-configured for the crypto-eire xbtc-pool.
+  Crypto-Éire branding: themed DATUM dashboard (sidecar injects the site's colours, logo
+  and wordmark) and the Crypto-Éire app icon.
 dependencies:
   - xbtc-node
 path: ""

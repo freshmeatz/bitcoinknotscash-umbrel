@@ -1,0 +1,71 @@
+/* Crypto-Éire theme for the DATUM gateway dashboard.
+   Injected after /assets/style.css by the theme nginx sidecar, so it overrides it.
+   Targets DATUM's real markup: .header h1 (+img,+span), .menu-container a,
+   .table-container (+h2), td.label / td, .fixed-width, .note. */
+:root{
+  --ce-bg:#05060a; --ce-line:#1e2436;
+  --ce-green:#22c55e; --ce-green-br:#4cf5a8; --ce-green-deep:#0e3a24;
+  --ce-purple:#7c3aed; --ce-purple-br:#9d4edd; --ce-orange:#f7931a;
+  --ce-txt:#e7eaf2; --ce-muted:#949cb2; --ce-faint:#606a84;
+  --ce-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+body{
+  background:
+    radial-gradient(900px 440px at 12% -8%, #0d1626 0%, transparent 60%),
+    radial-gradient(760px 420px at 100% -6%, #160f33 0%, transparent 58%),
+    var(--ce-bg) !important;
+  color:var(--ce-txt) !important;
+  font-family:Inter,ui-sans-serif,system-ui,"Segoe UI",Arial,sans-serif !important;
+}
+a{color:var(--ce-green-br) !important}
+.container{max-width:1000px !important}
+
+.header{
+  background:linear-gradient(180deg,#0c0f18,#080a11) !important;
+  border:1px solid var(--ce-line) !important;border-radius:16px !important;padding:8px 20px !important;
+}
+.header h1{color:var(--ce-muted) !important;font-weight:600 !important;letter-spacing:.3px;display:flex;align-items:center;gap:12px}
+.header h1 img{
+  width:36px !important;height:36px !important;border-radius:9px;vertical-align:middle !important;
+  box-shadow:0 0 0 1px var(--ce-line),0 0 20px rgba(76,245,168,.14);
+}
+.header h1 span{color:var(--ce-green-br) !important;font-weight:600}
+
+.menu-container{background:transparent !important;display:flex;gap:8px;flex-wrap:wrap;padding:16px 0 !important}
+.menu-container a{
+  background:#10131d !important;color:var(--ce-muted) !important;border:1px solid var(--ce-line) !important;
+  border-radius:10px !important;font-weight:500 !important;padding:9px 18px !important;font-size:14px !important;
+}
+.menu-container a:hover{background:rgba(124,58,237,.14) !important;color:#fff !important}
+.menu-container a[style]{
+  background:var(--ce-green-deep) !important;color:var(--ce-green-br) !important;
+  border-color:var(--ce-green) !important;box-shadow:0 0 18px rgba(34,197,94,.14) !important;
+}
+
+.table-container{
+  background:linear-gradient(180deg,#10131e,#0b0e16) !important;border:1px solid var(--ce-line) !important;
+  border-radius:14px !important;padding:16px 18px !important;margin:12px !important;
+}
+.table-container h2{
+  color:var(--ce-green-br) !important;font-size:15px !important;font-weight:600 !important;letter-spacing:.04em;
+  border-bottom:1px solid var(--ce-line) !important;padding-bottom:10px !important;margin:0 0 6px !important;
+}
+table{width:100%}
+td{color:var(--ce-txt) !important;padding:9px 12px !important;border-bottom:1px solid rgba(30,36,54,.55) !important;
+  font-family:var(--ce-mono) !important}
+td.label{
+  background:transparent !important;color:var(--ce-faint) !important;text-transform:uppercase;
+  font-family:Inter,sans-serif !important;font-size:11px !important;letter-spacing:.07em;white-space:nowrap;
+}
+td:not(.label){background:transparent !important}
+.fixed-width{font-family:var(--ce-mono) !important;color:var(--ce-muted) !important}
+.leading_zeros{color:#394056 !important}
+.note{color:var(--ce-faint) !important}
+
+button, input[type=submit], input[type=button], .button{
+  background:linear-gradient(180deg,var(--ce-purple-br),var(--ce-purple)) !important;color:#fff !important;
+  border:1px solid #3a2b7a !important;border-radius:9px !important;font-weight:500 !important;
+}
+input, select, textarea{
+  background:#0b0e16 !important;color:var(--ce-txt) !important;border:1px solid var(--ce-line) !important;border-radius:8px !important;
+}
