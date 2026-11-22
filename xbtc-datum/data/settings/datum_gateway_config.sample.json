@@ -1,0 +1,36 @@
+{
+  "_comment": "Sample DATUM config for xBTC. The 'bitcoind' and 'api' sections are filled in by the app entrypoint from the xbtc-node dependency; set 'mining.pool_address' to YOUR XBTC payout address in the app's Config tab. Defaults to the crypto-eire xbtc-pool (TIDES).",
+  "bitcoind": {
+    "rpcuser": "<injected from xbtc-node>",
+    "rpcpassword": "<injected from xbtc-node>",
+    "rpcurl": "<injected from xbtc-node>"
+  },
+  "api": {
+    "listen_port": 21009,
+    "modify_conf": true,
+    "admin_password": "<injected>"
+  },
+  "mining": {
+    "pool_address": "",
+    "coinbase_tag_primary": "DATUM on Umbrel",
+    "coinbase_tag_secondary": "xBTC",
+    "pow_algorithm": "blake2b",
+    "coinbase_unique_id": 0
+  },
+  "stratum": {
+    "listen_port": 23333,
+    "fingerprint_miners": true,
+    "vardiff_min": 4096
+  },
+  "logger": {
+    "log_level_console": 2
+  },
+  "datum": {
+    "pool_pass_workers": true,
+    "pool_pass_full_users": true,
+    "pooled_mining_only": true,
+    "pool_host": "datum.crypto-eire.com",
+    "pool_port": 22000,
+    "pool_pubkey": "be5cdcccd5b6c89e190af0052b32d9355de9713d1ec87e0a913daf1903f379f7ab4df67dd52d852dcdf82fb72dd88639c22e78ec731c769b8a1d5c36514aae3c"
+  }
+}

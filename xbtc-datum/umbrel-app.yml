@@ -1,0 +1,37 @@
+manifestVersion: 1
+id: xbtc-datum
+name: DATUM for xBTC
+tagline: Decentralized Bitcoin Knots Cash mining with your own templates
+icon: https://raw.githubusercontent.com/BitcoinKnotsCash/BitcoinKnotsCash/master/logo.png
+category: Bitcoin
+version: "v1.15-blake2b"
+port: 21019
+description: >-
+  A DATUM (Decentralized Alternative Templates for Universal Mining) gateway for
+  Bitcoin Knots Cash (xBTC), so your BLAKE2b miners build their own block templates
+  from YOUR xBTC node and mine to a DATUM/TIDES pool — no pool operator controls your
+  block contents.
+
+
+  This is a SEPARATE DATUM instance dedicated to xBTC. It depends on the Bitcoin Knots
+  Cash Node app and does not interfere with any DATUM you run for another chain.
+
+
+  Defaults to the crypto-eire xBTC pool (datum.crypto-eire.com:22000, TIDES). Point your
+  miners at this device's IP on the stratum port, with your XBTC address as the username.
+  Set your payout address in the app's Config tab after install.
+developer: OCEAN / Bitcoin Knots Cash
+website: https://github.com/BitcoinKnotsCash/BitcoinKnotsCash
+submitter: freshmeatz
+submission: https://github.com/freshmeatz/bitcoinknotscash-umbrel
+repo: https://github.com/OCEAN-xyz/datum_gateway
+support: https://github.com/freshmeatz/bitcoinknotscash-umbrel/issues
+gallery:
+  - https://raw.githubusercontent.com/BitcoinKnotsCash/BitcoinKnotsCash/master/logo.png
+releaseNotes: >-
+  Dedicated xBTC DATUM gateway, pre-configured for the crypto-eire xbtc-pool.
+dependencies:
+  - xbtc-node
+path: ""
+defaultUsername: ""
+defaultPassword: ""

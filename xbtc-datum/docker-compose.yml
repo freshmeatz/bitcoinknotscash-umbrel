@@ -1,0 +1,34 @@
+version: "3.7"
+
+# DATUM gateway for Bitcoin Knots Cash (xBTC).
+# Mirrors the working btc-datum app, repointed at the xbtc-node dependency.
+# The bitcoind RPC (host/user/pass) is injected into datum_gateway_config.json by
+# hooks/pre-start from the xbtc-node ("bitcoin") dependency's APP_BITCOIN_* vars, so
+# it is NOT hardcoded here. The app frontend is the DATUM gateway's own dashboard (21009).
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: xbtc-datum_datum_1
+      APP_PORT: 21009
+    container_name: xbtc-datum_app_proxy_1
+
+  datum:
+    image: ghcr.io/horizon-btc/datum:v1.15-blake2b@sha256:e0d99c488dfca0401c19707e3f036b759ba6dd48223b5f0fc11029d2eaf9cf48
+    entrypoint:
+      - /app/datum_gateway
+    command:
+      - "--config=/app/conf/datum_gateway_config.json"
+    user: "1000:1000"
+    restart: on-failure
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+    volumes:
+      - ${APP_DATA_DIR}/data/settings/:/app/conf/
+    ports:
+      # Stratum endpoint your BLAKE2b miners connect to. Host port 23349 avoids clashing
+      # with a btc-datum you may already run on 23333.
+      - "23349:23333"
+    container_name: xbtc-datum_datum_1

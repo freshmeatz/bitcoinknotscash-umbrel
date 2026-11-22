@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Injects the xBTC node's RPC connection into datum_gateway_config.json before DATUM starts.
+# APP_BITCOIN_NODE_IP / APP_BITCOIN_RPC_PORT / APP_BITCOIN_RPC_USER / APP_BITCOIN_RPC_PASS
+# are exported by the xbtc-node ("bitcoin") dependency's exports.sh.
+#
+# NOTE: reconstructed to match how btc-datum behaved (umbrel rewrites the bitcoind section
+# from the selected dependency). Validate against your working install's hook if it has one.
+set -euo pipefail
+
+SETTINGS_DIR="${APP_DATA_DIR}/data/settings"
+CONF="${SETTINGS_DIR}/datum_gateway_config.json"
+SAMPLE="${SETTINGS_DIR}/datum_gateway_config.sample.json"
+
+mkdir -p "${SETTINGS_DIR}"
+
+# Seed from the shipped sample on first run.
+if [[ ! -f "${CONF}" && -f "${SAMPLE}" ]]; then
+  cp "${SAMPLE}" "${CONF}"
+fi
+[[ -f "${CONF}" ]] || { echo "xbtc-datum: no datum_gateway_config.json to configure"; exit 0; }
+
+# Rewrite the bitcoind section from the dependency's RPC details.
+tmp="$(mktemp)"
+jq \
+  --arg url  "${APP_BITCOIN_NODE_IP}:${APP_BITCOIN_RPC_PORT}" \
+  --arg user "${APP_BITCOIN_RPC_USER}" \
+  --arg pass "${APP_BITCOIN_RPC_PASS}" \
+  '.bitcoind.rpcurl = $url | .bitcoind.rpcuser = $user | .bitcoind.rpcpassword = $pass' \
+  "${CONF}" > "${tmp}" && mv "${tmp}" "${CONF}"
+
+echo "xbtc-datum: pointed DATUM at ${APP_BITCOIN_NODE_IP}:${APP_BITCOIN_RPC_PORT}"

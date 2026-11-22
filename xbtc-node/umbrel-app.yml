@@ -1,0 +1,40 @@
+manifestVersion: 1
+id: xbtc-node
+name: Bitcoin Knots Cash Node
+tagline: A full Bitcoin Knots Cash (xBTC) node — BLAKE2b, fair launch, 21M
+icon: https://raw.githubusercontent.com/BitcoinKnotsCash/BitcoinKnotsCash/master/logo.png
+category: Bitcoin
+version: "v0.2.1-xbtc"
+port: 2113
+description: >-
+  Run a full Bitcoin Knots Cash (xBTC) node on your umbrelOS device.
+
+
+  xBTC is a BLAKE2b proof-of-work fork of Bitcoin Knots v29.4 with a fair launch,
+  a 21,000,000 coin supply, ASERT per-block difficulty, and decentralized DATUM/TIDES
+  mining. The genesis block is SHA-256d; every block from height 1 is BLAKE2b.
+
+
+  This app runs the real Bitcoin Knots Cash binaries (not the plain Bitcoin build the
+  community image shipped), so it actually syncs the xBTC chain. Other apps — a mempool
+  explorer, Electrum server, or a DATUM gateway — can depend on it as their "bitcoin" node.
+
+
+  Default P2P port 9333 / RPC 9332 inside umbrel (the chain's own defaults are 8555/8556).
+developer: Bitcoin Knots Cash
+website: https://github.com/BitcoinKnotsCash/BitcoinKnotsCash
+submitter: freshmeatz
+submission: https://github.com/freshmeatz/bitcoinknotscash-umbrel
+repo: https://github.com/BitcoinKnotsCash/BitcoinKnotsCash
+support: https://github.com/BitcoinKnotsCash/BitcoinKnotsCash/issues
+gallery:
+  - https://raw.githubusercontent.com/BitcoinKnotsCash/BitcoinKnotsCash/master/logo.png
+releaseNotes: >-
+  First working umbrel package: runs the real Bitcoin Knots Cash binaries and forces all
+  RPC/P2P settings on the command line (the Cash binary ignores the generated conf), so the
+  node binds RPC on all interfaces and is reachable by dependent apps.
+dependencies: []
+implements: bitcoin
+path: ""
+defaultUsername: ""
+defaultPassword: ""
