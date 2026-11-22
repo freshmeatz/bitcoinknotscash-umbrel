@@ -4,7 +4,7 @@ name: DATUM for xBTC
 tagline: Decentralized Bitcoin Knots Cash mining with your own templates
 icon: https://raw.githubusercontent.com/freshmeatz/bitcoinknotscash-umbrel/master/xbtc-datum/theme/assets/app-icon.png
 category: Bitcoin
-version: "v1.15-blake2b.1"
+version: "v1.15-blake2b.2"
 port: 21019
 description: >-
   A DATUM (Decentralized Alternative Templates for Universal Mining) gateway for
