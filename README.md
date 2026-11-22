@@ -52,12 +52,13 @@ Folded in from a working install and reconstructed:
 
 ### Still to do before it's fully turnkey
 
-1. **`xbtc-node/torrc.template`** (+ any `xbtc-node/hooks/`) — copy from `~/umbrel/app-data/xbtc-node/`;
-   the compose mounts a generated `torrc`, so the template is needed for the Tor hidden services.
-2. **Validate `xbtc-datum/hooks/pre-start`** against however your working `btc-datum` actually
+1. **Validate `xbtc-datum/hooks/pre-start`** against however your working `btc-datum` actually
    injected the node RPC (it has no `exports.sh`, so it used a hook or the image's entrypoint).
-3. **Run the image workflow** (`Actions → Build xBTC node image`) so `ghcr.io/<you>/umbrel-xbtc-cash`
-   exists, then **install `xbtc-node`, then `xbtc-datum`**, and set your payout address in DATUM's Config tab.
+2. **Install test**: add this store on an Umbrel, install `xbtc-node`, then `xbtc-datum`
+   (set its bitcoin dependency to the node), and set your payout address in DATUM's Config tab.
+
+The node image (`ghcr.io/freshmeatz/umbrel-xbtc-cash:v0.2.1-xbtc`) is built by CI and published
+public, so it installs without a manual build.
 
 ## Credits
 
