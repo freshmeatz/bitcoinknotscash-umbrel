@@ -1,5 +1,5 @@
 {
-  "_comment": "Sample DATUM config for xBTC. The 'bitcoind' section is filled in by hooks/pre-start from the xbtc-node dependency. Set 'mining.pool_address' to YOUR XBTC payout address in the Config tab (default admin login: admin / umbrelxbtc — CHANGE IT). NOTE: with datum.pool_pass_full_users=true the pool credits the miner's Stratum username, so set your address as the miner's username too. Defaults to the crypto-eire xbtc-pool (TIDES).",
+  "_comment": "Sample DATUM config for xBTC. The 'bitcoind' section is filled in by hooks/pre-start from the xbtc-node dependency. Set 'mining.pool_address' to YOUR XBTC payout address in the Config tab (default admin login: admin / umbrelxbtc — CHANGE IT). Until mining.pool_address is a valid xBTC address, DATUM logs 'Could not generate output script for pool addr' and will not build templates, so set it first. NOTE: with datum.pool_pass_full_users=true the pool credits the miner's Stratum username, so set your address as the miner's username too. Defaults to the crypto-eire xbtc-pool (TIDES).",
   "bitcoind": {
     "rpcuser": "<injected from xbtc-node>",
     "rpcpassword": "<injected from xbtc-node>",
