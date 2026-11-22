@@ -46,10 +46,13 @@ and pushed to `ghcr.io/<owner>/umbrel-xbtc-cash`. Run it once before installing,
    (BLAKE2b, genesis `00000ff9…`, ~17k blocks — not the 810 GB BTC chain).
 3. Install **DATUM for xBTC** (`xbtc-datum`); its `bitcoin` dependency resolves to `xbtc-node`
    automatically, and `hooks/pre-start` wires the node's RPC into the DATUM config.
-4. Set your xBTC payout address in DATUM's **Config tab** (`mining.pool_address`). It defaults to
-   the crypto-eire xbtc-pool (TIDES).
-5. Point your BLAKE2b miners at this device's IP on the Stratum port (host `23349`), with username
-   `<your-xbtc-address>.<worker>`.
+4. Open DATUM's dashboard — default admin login **`admin` / `umbrelxbtc`** (shown on the app's
+   Umbrel page; **change it** in the Config tab). It defaults to the crypto-eire xbtc-pool (TIDES).
+5. Point your BLAKE2b miners at this device's IP on the Stratum port (host `23349`), with the
+   **username set to your xBTC payout address** plus an optional worker:
+   `<your-xbtc-address>.<worker>`. With `datum.pool_pass_full_users` (the default), the pool credits
+   the address in the miner's username — `mining.pool_address` is only a fallback and does **not**
+   override it.
 
 The node image (`ghcr.io/freshmeatz/umbrel-xbtc-cash:v0.2.1-xbtc`) is built by CI and published
 public, so both apps install without a manual build.

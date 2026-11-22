@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Ensure the uid-1000 bitcoind container can create its data subdirs on first start.
+#
+# WHY: umbrel runs this app's i2pd sidecar as root, and docker auto-creates the bind-mount
+# source ${APP_DATA_DIR}/data as root:root. The bitcoind container runs as user 1000:1000,
+# so it then cannot `mkdir /data/bitcoin` or `/data/app` and crash-loops with
+# "EACCES: permission denied, mkdir '/data/bitcoin'". This hook runs as root and
+# pre-creates those dirs owned by 1000. It runs every start, so it self-heals (e.g. after
+# a reset). The i2pd dir stays as-is; i2pd runs as root and is unaffected.
+set -euo pipefail
+
+D="${APP_DATA_DIR}/data"
+mkdir -p "${D}/bitcoin" "${D}/app"
+chown 1000:1000 "${D}" "${D}/bitcoin" "${D}/app" 2>/dev/null || true
+chmod 0755 "${D}" "${D}/bitcoin" "${D}/app" 2>/dev/null || true
+
+echo "xbtc-node: ensured ${D}/bitcoin and ${D}/app are writable by uid 1000"

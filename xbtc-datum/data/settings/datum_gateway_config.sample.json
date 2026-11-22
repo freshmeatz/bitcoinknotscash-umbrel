@@ -1,5 +1,5 @@
 {
-  "_comment": "Sample DATUM config for xBTC. The 'bitcoind' and 'api' sections are filled in by the app entrypoint from the xbtc-node dependency; set 'mining.pool_address' to YOUR XBTC payout address in the app's Config tab. Defaults to the crypto-eire xbtc-pool (TIDES).",
+  "_comment": "Sample DATUM config for xBTC. The 'bitcoind' section is filled in by hooks/pre-start from the xbtc-node dependency. Set 'mining.pool_address' to YOUR XBTC payout address in the Config tab (default admin login: admin / umbrelxbtc — CHANGE IT). NOTE: with datum.pool_pass_full_users=true the pool credits the miner's Stratum username, so set your address as the miner's username too. Defaults to the crypto-eire xbtc-pool (TIDES).",
   "bitcoind": {
     "rpcuser": "<injected from xbtc-node>",
     "rpcpassword": "<injected from xbtc-node>",
@@ -8,7 +8,7 @@
   "api": {
     "listen_port": 21009,
     "modify_conf": true,
-    "admin_password": "<injected>"
+    "admin_password": "umbrelxbtc"
   },
   "mining": {
     "pool_address": "",
@@ -20,7 +20,7 @@
   "stratum": {
     "listen_port": 23333,
     "fingerprint_miners": true,
-    "vardiff_min": 4096
+    "vardiff_min": "17.6T"
   },
   "logger": {
     "log_level_console": 2

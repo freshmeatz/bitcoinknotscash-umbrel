@@ -33,5 +33,5 @@ releaseNotes: >-
 dependencies:
   - xbtc-node
 path: ""
-defaultUsername: ""
-defaultPassword: ""
+defaultUsername: "admin"
+defaultPassword: "umbrelxbtc"

@@ -26,6 +26,15 @@ jq \
   '.bitcoind.rpcurl = $url | .bitcoind.rpcuser = $user | .bitcoind.rpcpassword = $pass' \
   "${CONF}" > "${tmp}" && mv "${tmp}" "${CONF}"
 
+# Give the dashboard a working admin login out of the box (username: admin). Only set it
+# if it's still the shipped placeholder/empty, so a password you choose is never clobbered.
+# Matches defaultUsername/defaultPassword in umbrel-app.yml. CHANGE IT in the Config tab.
+cur_pw="$(jq -r '.api.admin_password // ""' "${CONF}")"
+if [[ -z "${cur_pw}" || "${cur_pw}" == "<injected>" ]]; then
+  tmp2="$(mktemp)"
+  jq '.api.admin_password = "umbrelxbtc"' "${CONF}" > "${tmp2}" && mv "${tmp2}" "${CONF}"
+fi
+
 # CRITICAL: the datum container runs as uid 1000, but this hook runs as root and
 # `mktemp`+`mv` above leaves CONF owned root:root mode 600 — and umbrel copies the
 # seeded settings dir in as root too. Without this, the container gets
