@@ -76,20 +76,45 @@ one image. To change the theme: edit `xbtc-datum/theme/assets/crypto-eire.css`, 
 dependency; DATUM connects to the node and the pool with its Stratum V1 server live, builds
 block templates from the node, and serves the Crypto-Éire-themed dashboard.
 
-## Credits
+## Credits & licenses
 
-This store repackages the projects below for umbrelOS. All names, trademarks and logos belong
-to their respective owners.
+This store only packages and themes existing software for umbrelOS; it claims no ownership of
+it. Copyrights, trademarks and logos belong to their respective owners. Attribution below is
+taken from the source trees that are actually built/run.
 
-- **Bitcoin Knots Cash (xBTC)** — the chain and node binaries (a BLAKE2b fork of Bitcoin Knots):
-  https://github.com/BitcoinKnotsCash/BitcoinKnotsCash
-- **DATUM Gateway** — OCEAN, the gateway software and its dashboard:
-  https://github.com/OCEAN-xyz/datum_gateway
-- **DATUM BLAKE2b image** — horizon-btc, the xBTC/BLAKE2b build the `xbtc-datum` app runs
-  (`ghcr.io/horizon-btc/datum`): https://github.com/horizon-btc
-- **Crypto-Éire** — https://crypto-eire.com — the default xBTC DATUM/TIDES pool, and the logo
-  and brand colours the dashboard theme reproduces.
-- **nginx** (https://nginx.org) — the dashboard theme sidecar.
-- **Tor** and **i2pd** — the node's privacy sidecars (via Umbrel's images).
-- Base node scaffolding from the upstream `umbrel-xbtc` community image and **Bitcoin Knots**
-  (https://bitcoinknots.org).
+### DATUM Gateway — MIT License
+
+The `xbtc-datum` app runs the **DATUM Gateway**.
+Source: https://github.com/OCEAN-xyz/datum_gateway
+
+> Copyright (c) 2024-2026 Bitcoin Ocean, LLC, Jason Hughes, and individual contributors
+> (in-source header: "Copyright (c) 2024-2025 Bitcoin Ocean, LLC & Jason Hughes")
+
+Released under the **MIT License**. The DATUM Gateway `LICENSE` additionally reserves the
+**"DATUM" name and logos** as trademarks of Mummolin, Inc. / Bitcoin OCEAN, LLC — the MIT grant
+does **not** license those marks. Accordingly, the Crypto-Éire dashboard theme **replaces** the
+DATUM logo and wordmark with Crypto-Éire branding rather than reusing the DATUM marks; "DATUM"
+appears here only descriptively, to say which software is run. The container image built/run is
+`ghcr.io/horizon-btc/datum:v1.15-blake2b`, a BLAKE2b build of DATUM published by **horizon-btc**
+(https://github.com/horizon-btc); no separate public source tree for that build was found.
+
+### Bitcoin Knots Cash (xBTC node) — MIT License
+
+The `xbtc-node` app runs **Bitcoin Knots Cash** binaries.
+Source: https://github.com/BitcoinKnotsCash/BitcoinKnotsCash
+
+> Copyright (c) 2009-2025 The Bitcoin Core developers
+> Copyright (c) 2009-2025 Bitcoin Developers
+
+Released under the **MIT License** (`COPYING`). Bitcoin Knots Cash is a derivative of
+**Bitcoin Knots v29.4** (https://github.com/bitcoinknots/bitcoin) and **Bitcoin Core**
+(https://github.com/bitcoin/bitcoin) — with thanks to their developers.
+
+### Other components
+
+- **Crypto-Éire** — https://crypto-eire.com — the default xBTC DATUM/TIDES pool; its logo and
+  brand colours are reproduced by the dashboard theme. "Crypto-Éire" and its logo belong to that
+  project.
+- **nginx** — https://nginx.org (2-clause BSD) — the dashboard theme sidecar.
+- **Tor** and **i2pd** — the node's privacy sidecars, via Umbrel's published images.
+- umbrelOS app scaffolding and the upstream `umbrel-xbtc` community image.
