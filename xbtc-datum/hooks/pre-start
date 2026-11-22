@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
-# Injects the xBTC node's RPC connection into datum_gateway_config.json before DATUM starts.
+# Injects the xBTC node's RPC connection into datum_gateway_config.json before DATUM starts,
+# and fixes the config file permissions so the uid-1000 DATUM container can read/write it.
 # APP_BITCOIN_NODE_IP / APP_BITCOIN_RPC_PORT / APP_BITCOIN_RPC_USER / APP_BITCOIN_RPC_PASS
 # are exported by the xbtc-node ("bitcoin") dependency's exports.sh.
-#
-# NOTE: reconstructed to match how btc-datum behaved (umbrel rewrites the bitcoind section
-# from the selected dependency). Validate against your working install's hook if it has one.
 set -euo pipefail
 
 SETTINGS_DIR="${APP_DATA_DIR}/data/settings"
@@ -27,5 +25,15 @@ jq \
   --arg pass "${APP_BITCOIN_RPC_PASS}" \
   '.bitcoind.rpcurl = $url | .bitcoind.rpcuser = $user | .bitcoind.rpcpassword = $pass' \
   "${CONF}" > "${tmp}" && mv "${tmp}" "${CONF}"
+
+# CRITICAL: the datum container runs as uid 1000, but this hook runs as root and
+# `mktemp`+`mv` above leaves CONF owned root:root mode 600 — and umbrel copies the
+# seeded settings dir in as root too. Without this, the container gets
+# "unable to open /app/conf/datum_gateway_config.json: Permission denied" and
+# crash-loops. Make the dir traversable and the config readable+writable by uid 1000
+# (writable so the DATUM admin "Config tab" can save). Runs every start, so it self-heals.
+chown -R 1000:1000 "${SETTINGS_DIR}" 2>/dev/null || true
+chmod 0755 "${SETTINGS_DIR}" 2>/dev/null || true
+chmod 0644 "${CONF}" 2>/dev/null || true
 
 echo "xbtc-datum: pointed DATUM at ${APP_BITCOIN_NODE_IP}:${APP_BITCOIN_RPC_PORT}"

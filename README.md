@@ -39,26 +39,26 @@ The node image is built by `.github/workflows/build-images.yml` (manual or on Do
 and pushed to `ghcr.io/<owner>/umbrel-xbtc-cash`. Run it once before installing, or pin the
 `image:` in `xbtc-node/docker-compose.yml` to a tag you've built.
 
-## Status
+## Install
 
-Folded in from a working install and reconstructed:
-
-- `xbtc-node/`: `Dockerfile`, `docker-compose.yml`, `umbrel-app.yml`, **`exports.sh`** (real),
-  **`scripts/rpcauth.py`**. The compose + exports together define all `APP_XBTC_NODE_*` vars and
-  export the generic `APP_BITCOIN_*` vars the DATUM app consumes.
-- `xbtc-datum/`: `docker-compose.yml` (matches real `btc-datum`), `umbrel-app.yml`,
-  **`hooks/pre-start`** (injects the node RPC into the config), and a documented sample config
-  pre-set to the crypto-eire xbtc-pool.
-
-### Still to do before it's fully turnkey
-
-1. **Validate `xbtc-datum/hooks/pre-start`** against however your working `btc-datum` actually
-   injected the node RPC (it has no `exports.sh`, so it used a hook or the image's entrypoint).
-2. **Install test**: add this store on an Umbrel, install `xbtc-node`, then `xbtc-datum`
-   (set its bitcoin dependency to the node), and set your payout address in DATUM's Config tab.
+1. Add this store: **Settings → App Store → Community App Stores →** this repo's URL.
+2. Install **Bitcoin Knots Cash Node** (`xbtc-node`) and let it sync the xBTC chain
+   (BLAKE2b, genesis `00000ff9…`, ~17k blocks — not the 810 GB BTC chain).
+3. Install **DATUM for xBTC** (`xbtc-datum`); its `bitcoin` dependency resolves to `xbtc-node`
+   automatically, and `hooks/pre-start` wires the node's RPC into the DATUM config.
+4. Set your xBTC payout address in DATUM's **Config tab** (`mining.pool_address`). It defaults to
+   the crypto-eire xbtc-pool (TIDES).
+5. Point your BLAKE2b miners at this device's IP on the Stratum port (host `23349`), with username
+   `<your-xbtc-address>.<worker>`.
 
 The node image (`ghcr.io/freshmeatz/umbrel-xbtc-cash:v0.2.1-xbtc`) is built by CI and published
-public, so it installs without a manual build.
+public, so both apps install without a manual build.
+
+## Status
+
+**Tested working on umbrelOS.** The node syncs to the network tip and implements the `bitcoin`
+dependency; DATUM connects to the node and the pool with its Stratum V1 server live and builds
+block templates from the node.
 
 ## Credits
 
