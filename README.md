@@ -20,7 +20,8 @@ The earlier community image (`ghcr.io/bitcoinknotscash/umbrel-xbtc`) shipped a *
 Knots** binary built with **Bitcoin mainnet chainparams**. Installed, it loads the BTC genesis
 (`000000000019d668…`) and tries to sync ~1,000,000 blocks / ~810 GB — it can never sync xBTC
 (genesis `00000ff9…`, ~17k blocks). `xbtc-node/Dockerfile` fixes this by overlaying the **real
-Bitcoin Knots Cash binaries** from the official `v0.2.1-xbtc` release onto the umbrel scaffolding.
+Bitcoin Knots Cash binaries** from the official `v0.2.2-xbtc` release onto the umbrel scaffolding
+(verifying the download against the release's published `SHA256SUMS`).
 
 ## The two gotchas this store bakes in
 
@@ -56,7 +57,7 @@ and pushed to `ghcr.io/<owner>/umbrel-xbtc-cash`. Run it once before installing,
    the address in the miner's username — `mining.pool_address` is only a fallback and does **not**
    override it.
 
-The node image (`ghcr.io/freshmeatz/umbrel-xbtc-cash:v0.2.1-xbtc`) is built by CI and published
+The node image (`ghcr.io/freshmeatz/umbrel-xbtc-cash:v0.2.2-xbtc`) is built by CI and published
 public, so both apps install without a manual build.
 
 ## Theming (DATUM dashboard)

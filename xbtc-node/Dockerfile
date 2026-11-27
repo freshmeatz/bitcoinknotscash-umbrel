@@ -14,16 +14,23 @@
 # image from the dev source instead of depending on the upstream image.
 
 ARG BASE=ghcr.io/bitcoinknotscash/umbrel-xbtc:v0.2.1-xbtc
-ARG XBTC_RELEASE=v0.2.1-xbtc
+ARG XBTC_RELEASE=v0.2.2-xbtc
+# sha256 of bitcoinknotscash-linux64.tar.gz for ${XBTC_RELEASE}, from the release's
+# published SHA256SUMS. MUST be updated together with XBTC_RELEASE.
+#   v0.2.2-xbtc: 6d62b9afd846b8b40abbf2a9c049bba972d34d5d994142306292a2a15ec53bb3
+ARG XBTC_SHA256=6d62b9afd846b8b40abbf2a9c049bba972d34d5d994142306292a2a15ec53bb3
 
 FROM ${BASE}
 ARG XBTC_RELEASE
+ARG XBTC_SHA256
 
-# curl stays (blocknotify uses it). Pull the Cash binaries, install over the BTC ones,
-# and fail the build if the result is not actually the "Knots Cash" daemon.
+# curl stays (blocknotify uses it). Pull the Cash binaries, VERIFY the checksum against the
+# release's published SHA256SUMS, install over the BTC ones, and fail the build if the result
+# is not actually the "Knots Cash" daemon.
 RUN set -eux; \
     url="https://github.com/BitcoinKnotsCash/BitcoinKnotsCash/releases/download/${XBTC_RELEASE}/bitcoinknotscash-linux64.tar.gz"; \
     curl -fsSL -o /tmp/xbtc.tar.gz "$url"; \
+    echo "${XBTC_SHA256}  /tmp/xbtc.tar.gz" | sha256sum -c -; \
     tar -xzf /tmp/xbtc.tar.gz -C /tmp; \
     bd="$(find /tmp -type f -name bitcoind | head -1)"; \
     bc="$(find /tmp -type f -name bitcoin-cli | head -1)"; \

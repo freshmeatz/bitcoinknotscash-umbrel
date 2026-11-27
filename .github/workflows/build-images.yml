@@ -9,10 +9,10 @@ on:
     inputs:
       xbtc_release:
         description: "BitcoinKnotsCash release tag to bundle"
-        default: "v0.2.1-xbtc"
+        default: "v0.2.2-xbtc"
       tag:
         description: "Image tag to push"
-        default: "v0.2.1-xbtc"
+        default: "v0.2.2-xbtc"
   push:
     paths:
       - "xbtc-node/Dockerfile"
@@ -44,5 +44,5 @@ jobs:
           file: ./xbtc-node/Dockerfile
           push: true
           build-args: |
-            XBTC_RELEASE=${{ github.event.inputs.xbtc_release || 'v0.2.1-xbtc' }}
-          tags: ghcr.io/${{ github.repository_owner }}/umbrel-xbtc-cash:${{ github.event.inputs.tag || 'v0.2.1-xbtc' }}
+            XBTC_RELEASE=${{ github.event.inputs.xbtc_release || 'v0.2.2-xbtc' }}
+          tags: ghcr.io/${{ github.repository_owner }}/umbrel-xbtc-cash:${{ github.event.inputs.tag || 'v0.2.2-xbtc' }}

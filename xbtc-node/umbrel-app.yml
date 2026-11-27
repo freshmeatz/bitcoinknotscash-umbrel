@@ -4,7 +4,7 @@ name: Bitcoin Knots Cash Node
 tagline: A full Bitcoin Knots Cash (xBTC) node — BLAKE2b, fair launch, 21M
 icon: https://raw.githubusercontent.com/BitcoinKnotsCash/BitcoinKnotsCash/master/logo.png
 category: Bitcoin
-version: "v0.2.1-xbtc"
+version: "v0.2.2-xbtc"
 port: 2113
 description: >-
   Run a full Bitcoin Knots Cash (xBTC) node on your umbrelOS device.
@@ -30,9 +30,10 @@ support: https://github.com/BitcoinKnotsCash/BitcoinKnotsCash/issues
 gallery:
   - https://raw.githubusercontent.com/BitcoinKnotsCash/BitcoinKnotsCash/master/logo.png
 releaseNotes: >-
-  First working umbrel package: runs the real Bitcoin Knots Cash binaries and forces all
-  RPC/P2P settings on the command line (the Cash binary ignores the generated conf), so the
-  node binds RPC on all interfaces and is reachable by dependent apps.
+  Security update: upgrades to Bitcoin Knots Cash v0.2.2-xbtc, fixing CVE-2026-117348 — a
+  remote DoS in transaction relay (a peer could stall the node by repeating orphan-tx INVs).
+  Node-local fix, no reindex or resync. The build now also verifies the binary's SHA256
+  against the release's published checksum before installing it.
 dependencies: []
 implements: bitcoin
 path: ""
